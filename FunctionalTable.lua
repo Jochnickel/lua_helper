@@ -9,7 +9,7 @@ local NO_DESC = 'no function description'
 
 local function new(arg,description)
   local argIsntTable = 'table'~=type(arg)
-  local tab = argIsntTable and {} or arg.table or arg.tab or arg.t or {}
+  local tab = argIsntTable and {} or arg['table'] or arg.tab or arg.t or {}
   local _tostr = string.format('%s',tab)
   local selfable = (not argIsntTable) and arg.selfable or arg.self or arg.s
   local func = argIsntTable and arg or arg['function'] or arg.func or arg.f
