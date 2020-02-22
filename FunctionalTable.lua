@@ -6,7 +6,7 @@ local function new(arg)
   local desc = argIsntTable and 'No description' or arg.description or arg.desc or arg.d
   local protectMetatable = argIsntTable or not (arg.leakMetatable or arg.leak or arg.l)
   local readOnly = argIsntTable or not (arg.writeable or arg.writable or arg.write or arg.w)
-  local backgroundTable = {dummy = 1}
+  local backgroundTable = {}
   
   if 'function'~=type(func) then error('no function provided',2) end
   if 'string'~=type(desc) then error('Not a valid description',2) end
