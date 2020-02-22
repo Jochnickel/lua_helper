@@ -11,7 +11,8 @@ local function new(arg,description)
   local argIsntTable = 'table'~=type(arg)
   local tab = argIsntTable and {} or arg.table or arg.tab or arg.t or {}
   local _tostr = string.format('%s',tab)
-  local func = argIsntTable and arg or arg.function or arg.func or arg.f
+  local selfable = false
+  local func = argIsntTable and arg or arg['function'] or arg.func or arg.f
   local desc = argIsntTable and description or arg.description or arg.desc or arg.d or NO_DESC
   local protectMetatable = argIsntTable or not (arg.leakMetatable or arg.leak or arg.l)
   local readOnly = argIsntTable or not (arg.writeable or arg.writable or arg.write or arg.w)
@@ -21,7 +22,7 @@ local function new(arg,description)
   if 'string'~=type(desc) then error('Not a valid description',2) end
   
   setmetatable(tab,{
-    __call = func,
+    __call = selfable and func or function(self,...) return func(...) end,
     __index = backgroundTable,
     __metatable = protectMetatable or nil,
     __newindex = readOnly and function() error('Cant add new values' ,2) end or nil,
@@ -30,5 +31,12 @@ local function new(arg,description)
   return tab
 end
 
+local fT = new
+local foo = fT{func = function(asd) print(asd,'asd') end, desc = 'a print function', leakMetatable = false, writeable = false, backgroundTable ={dummy1 =1},table = {dummy2 =2}}
+foo('hello world') -- prints hello world
+-- print(foo,foo.dummy1, foo.dummy2) -- prints 'functional table x1234; a print function', 1, 2
 
 return new
+
+
+
