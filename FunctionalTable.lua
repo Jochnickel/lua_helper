@@ -1,4 +1,4 @@
- function n(arg)
+ function new(arg)
   local foregroundTable = {}
   local func = function() print('hello world') end
   local desc = 'dummy function description'
@@ -19,6 +19,8 @@
   return foregroundTable
 end
 
-local a = n()
+local a = new()
 a()
 print(a.dummy)
+
+return new
