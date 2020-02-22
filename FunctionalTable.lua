@@ -16,7 +16,7 @@ local function new(arg,description)
   local desc = argIsntTable and description or arg.description or arg.desc or arg.d or NO_DESC
   local protectMetatable = argIsntTable or not (arg.leakMetatable or arg.leak or arg.l)
   local readOnly = argIsntTable or not (arg.writeable or arg.writable or arg.write or arg.w)
-  local backgroundTable = {}
+  local backgroundTable = argIsntTable and {} or arg.backgroundTable or {}
   
   if 'function'~=type(func) then error('no function provided',2) end
   if 'string'~=type(desc) then error('Not a valid description',2) end
@@ -32,11 +32,20 @@ local function new(arg,description)
 end
 
 local fT = new
-local foo = fT{func = function(asd) print(asd,'asd') end, desc = 'a print function', leakMetatable = false, writeable = false, backgroundTable ={dummy1 =1},table = {dummy2 =2}}
+local foo = fT{
+  func = function(asd) print(asd,'asd') end,
+  desc = 'a print function',
+  leakMetatable = false,
+  writeable = false,
+  backgroundTable ={dummy1 =1},
+  table = {dummy2 =2}
+ }
 foo('hello world') -- prints hello world
--- print(foo,foo.dummy1, foo.dummy2) -- prints 'functional table x1234; a print function', 1, 2
+print(foo,foo.dummy1, foo.dummy2) -- prints 'functional table x1234; a print function', 1, 2
 
 return new
+
+
 
 
 
