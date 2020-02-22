@@ -1,5 +1,6 @@
- function new(arg)
+local function new(arg)
   local foregroundTable = {}
+  local _tostr = string.format('%s',foregroundTable)
   local func = function() print('hello world') end
   local desc = 'dummy function description'
   local protectMetatable = true
@@ -14,7 +15,9 @@
   mt.__index = backgroundTable
   mt.__metatable = protectMetatable and false or nil
   mt.__newindex = disableNewIndex and function() error('Cant add new values' ,2) end or nil
-  mt.__tostring = function() return 'Functional Table: '..desc end
+  mt.__tostring = function()
+    return string.format('functional %s; %s', _tostr, desc)
+  end
   setmetatable(foregroundTable,mt)
   return foregroundTable
 end
