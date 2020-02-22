@@ -23,7 +23,7 @@ local function new(arg,description)
   local mt = {}
   mt.__call = func
   mt.__index = backgroundTable
-  mt.__metatable = leakMetatable and nil
+  mt.__metatable = protectMetatable or nil
   mt.__newindex = readOnly and function() error('Cant add new values' ,2) end or nil
   mt.__tostring = function()
     return string.format('functional %s; %s', _tostr, desc)
