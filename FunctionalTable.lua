@@ -9,8 +9,8 @@ local NO_DESC = 'no description'
 
 local function new(arg,description)
   local argIsntTable = 'table'~=type(arg)
-  local foregroundTable = argIsntTable and {} or arg.table or arg.tab or arg.t or {}
-  local _tostr = string.format('%s',foregroundTable)
+  local tab = argIsntTable and {} or arg.table or arg.tab or arg.t or {}
+  local _tostr = string.format('%s',tab)
   local func = argIsntTable and arg or arg.function or arg.func or arg.f
   local desc = argIsntTable and description or arg.description or arg.desc or arg.d or NO_DESC
   local protectMetatable = argIsntTable or not (arg.leakMetatable or arg.leak or arg.l)
@@ -20,16 +20,14 @@ local function new(arg,description)
   if 'function'~=type(func) then error('no function provided',2) end
   if 'string'~=type(desc) then error('Not a valid description',2) end
   
-  local mt = {}
-  mt.__call = func
-  mt.__index = backgroundTable
-  mt.__metatable = protectMetatable or nil
-  mt.__newindex = readOnly and function() error('Cant add new values' ,2) end or nil
-  mt.__tostring = function()
-    return string.format('functional %s; %s', _tostr, desc)
-  end
-  setmetatable(foregroundTable,mt)
-  return foregroundTable
+  setmetatable(tab,{
+    __call = func,
+    __index = backgroundTable,
+    __metatable = protectMetatable or nil,
+    __newindex = readOnly and function() error('Cant add new values' ,2) end or nil,
+    __tostring = function() return string.format('functional %s; %s', _tostr, desc) end,
+  })
+  return tab
 end
 
 
