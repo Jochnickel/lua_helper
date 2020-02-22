@@ -13,7 +13,7 @@ local function new(arg,description)
   local _tostr = string.format('%s',foregroundTable)
   local func = argIsntTable and arg or arg.function or arg.func or arg.f
   local desc = argIsntTable and description or arg.description or arg.desc or arg.d or NO_DESC
-  local leakMetatable = not (argIsntTable or not (arg.leakMetatable or arg.leak or arg.l))
+  local protectMetatable = argIsntTable or not (arg.leakMetatable or arg.leak or arg.l)
   local readOnly = argIsntTable or not (arg.writeable or arg.writable or arg.write or arg.w)
   local backgroundTable = {}
   
