@@ -11,7 +11,7 @@ local function new(arg,description)
   local argIsntTable = 'table'~=type(arg)
   local tab = argIsntTable and {} or arg.table or arg.tab or arg.t or {}
   local _tostr = string.format('%s',tab)
-  local selfable = false
+  local selfable = (not argIsntTable) and arg.selfable or arg.self or arg.s
   local func = argIsntTable and arg or arg['function'] or arg.func or arg.f
   local desc = argIsntTable and description or arg.description or arg.desc or arg.d or NO_DESC
   local protectMetatable = argIsntTable or not (arg.leakMetatable or arg.leak or arg.l)
@@ -33,7 +33,7 @@ end
 
 local fT = new
 local foo = fT{
-  func = function(asd) print(asd,'asd') end,
+  func = print,
   desc = 'a print function',
   leakMetatable = false,
   writeable = false,
