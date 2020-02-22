@@ -5,7 +5,7 @@
 -- foo'hello world' -- prints hello world
 -- print(foo,foo.dummy1, foo.dummy2) -- prints 'functional table x1234; a print function', 1, 2
 
-local NO_DESC = 'no description'
+local NO_DESC = 'no function description'
 
 local function new(arg,description)
   local argIsntTable = 'table'~=type(arg)
