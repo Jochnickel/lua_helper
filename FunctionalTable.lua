@@ -22,5 +22,5 @@ end
 local a = new()
 a()
 print(a.dummy)
-
+print(a)
 return new
