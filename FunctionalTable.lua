@@ -38,7 +38,8 @@ local foo = fT{
   leakMetatable = false,
   writeable = false,
   backgroundTable ={dummy1 =1},
-  table = {dummy2 =2}
+  table = {dummy2 =2},
+  selfable = false
  }
 foo('hello world') -- prints hello world
 print(foo,foo.dummy1, foo.dummy2) -- prints 'functional table x1234; a print function', 1, 2
