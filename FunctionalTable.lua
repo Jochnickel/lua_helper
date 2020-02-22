@@ -1,3 +1,12 @@
+-- example usage and defaults
+
+-- local fT = require 'Functionaltable'
+-- local foo = fT{func = print, desc = 'a print function', leakMetatable = false, writeable = false, backgroundTable ={dummy1 =1},table = {dummy2 =2}}
+-- foo'hello world' -- prints hello world
+-- print(foo,foo.dummy1, foo.dummy2) -- prints 'functional table x1234; a print function', 1, 2
+
+
+
 local function new(arg)
   local argIsntTable = 'table'~=type(arg)
   local foregroundTable = {}
