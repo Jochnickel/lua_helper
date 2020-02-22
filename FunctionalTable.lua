@@ -32,8 +32,5 @@ local function new(arg)
   return foregroundTable
 end
 
-local a = new()
-a()
-print(a.dummy)
-print(a)
+
 return new
