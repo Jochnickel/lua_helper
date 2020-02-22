@@ -16,7 +16,7 @@
   mt.__newindex = disableNewIndex and function() error('Cant add new values' ,2) end or nil
   mt.__tostring = function() return 'Functional Table: '..desc end
   setmetatable(foregroundTable,mt)
-  return fore
+  return foregroundTable
 end
 
 local a = n()
