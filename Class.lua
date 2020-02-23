@@ -13,6 +13,8 @@
 --   constructor = function(self,a)
 --     self.a = a
 --   end,
+--   readOnlyClass = true,
+--   leakMetatable = false,
 --   
 -- }
 
