@@ -13,7 +13,7 @@
 --   constructor = function(self,a)
 --     self.a = a
 --   end,
---   self = {}
+--   
 -- }
 
 
