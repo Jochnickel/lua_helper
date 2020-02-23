@@ -15,7 +15,7 @@
 --   end,
 --   readOnlyClass = true,
 --   leakMetatable = false,
---   readOnlyObject = false
+--   readOnlyObject = false,
 -- }
 
 
