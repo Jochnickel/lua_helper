@@ -1,7 +1,7 @@
 local List = require "SortedList"
-function opairs(t)
-	if 'table'~=type(t) then error("arg not a table",2) end
-	print("Warning: the return value of opairs is NOT a next function with parameters")
+local opairs = function(t,nowarning)
+	if 'table'~=type(t) then error("arg not a table", 2) end
+	if nowarning~="nowarning" then print('Warning: the return value of opairs is NOT a next function with parameters. Supress with opairs(...,"nowarning")') end
 	local keys = List()
 	for k in pairs(t) do keys:Insert(k) end
 	local function _next(a,b)
@@ -10,9 +10,5 @@ function opairs(t)
 	end
 	return _next,t,nil
 end
-local testTable = {a = 11, b = 22, c = 33, [1] = 12, [2] = 23, [3] = 34,[false] = "no", [true] = "yes",[{}]="",[{}]=""} -- same as expected out
 
--- print(next(testTable))
-for k,v in opairs(testTable) do
-	print(k,v)
-end
+return opairs

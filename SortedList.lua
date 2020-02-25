@@ -25,11 +25,4 @@ local new = function()
 
 end
 
--- local l1 =new()
--- local testTable = {a = 11, b = 22, c = 33, [1] = 12, [2] = 23, [3] = 34,[false] = "no", [true] = "yes",[{}]="",[{}]=""} -- same as expected out
-
--- for k,v in pairs(testTable) do l1:Insert(k) end
--- l1:debug()
-
-
 return new
