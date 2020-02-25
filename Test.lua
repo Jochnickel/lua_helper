@@ -19,5 +19,5 @@ require "table.length test" "silent"
 require "opairs test" "silent"
 require "SortedList test" "silent"
 require "Args"
-
+require "print"
 _G.print = p
