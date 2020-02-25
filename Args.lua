@@ -5,8 +5,12 @@ local args = function(...)
 	local o = {...}
 	local length = table.length(o)
 	local single = 1==length
+	local oByType = {}
 	for k,v in pairs(o) do
-
+		local t = type(v)
+		oByType[t] = oByType[t] or {}
+		table.insert(oByType[t],v)
+	end
 
 	return {}
 end
